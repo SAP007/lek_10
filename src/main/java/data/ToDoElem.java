@@ -17,4 +17,8 @@ public class ToDoElem {
     public int getId() {
         return id;
     }
+
+    public String toString() {
+        return "{" + id + "," + todo + "}";
+    }
 }

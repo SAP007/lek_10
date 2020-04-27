@@ -6,21 +6,21 @@ import java.util.List;
 
 public class ToDoDAO {
 
-    private static ToDoDAO insance;
+    private static ToDoDAO instance;
     private List<ToDoElem> list;
 
     public  ToDoDAO() {
 
         list = new ArrayList<ToDoElem>();
-        list.add(new ToDoElem(1,"Støvsuge"));
+        list.add(new ToDoElem(1,"handel"));
 
 
     }
 
     public static ToDoDAO getInstance() {
-        if (insance == null)
-            return new ToDoDAO();
-        return insance;
+        if (instance == null)
+            instance = new ToDoDAO();
+        return instance;
     }
 
     public String getTodoById(int id) {
@@ -36,6 +36,20 @@ public class ToDoDAO {
 
     public void addElement(ToDoElem elem) {
         list.add(elem);
+    }
+
+    public List<ToDoElem> getList() {
+        return list;
+    }
+
+    public String getListAsString() {
+        String totalString = "";
+
+        for (ToDoElem elem : list) {
+            totalString = totalString + "{" + elem.getId() + "," + elem.getTodo() + "}";
+        }
+
+        return totalString;
     }
 
 }
