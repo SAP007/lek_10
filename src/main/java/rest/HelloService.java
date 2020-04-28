@@ -19,8 +19,8 @@ public class HelloService {
         return todo.getListAsString();
 
     }
-/*
-    @GET
+
+    @POST
     @Path("/getfromid")
     public String getTodoFromId(@FormParam("getid") String id) {
         ToDoDAO todo = ToDoDAO.getInstance();
@@ -30,7 +30,7 @@ public class HelloService {
             }
         }
         return "Element with id: " + id + "does not exist";
-    }*/
+    }
 
 
     @POST
