@@ -2,11 +2,12 @@ package rest;
 
 import data.ToDoDAO;
 import data.ToDoElem;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("hello")
@@ -38,7 +39,6 @@ public class HelloService {
     public String addToDo(@FormParam("inputString") String input, @FormParam("inputId") String idString)
     {
         int id = Integer.parseInt(idString);
-
 
         ToDoElem ingredient = new ToDoElem(id, input);
         ToDoDAO.getInstance().addElement(ingredient);
