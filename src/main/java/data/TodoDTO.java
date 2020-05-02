@@ -1,11 +1,11 @@
 package data;
 
-public class ToDoElem {
+public class TodoDTO {
 
     private int id;
     private String todo;
 
-    public ToDoElem(int id, String todo) {
+    public TodoDTO(int id, String todo) {
         this.id = id;
         this.todo = todo;
     }

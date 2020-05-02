@@ -1,21 +1,16 @@
 package rest;
 
-import data.ToDoDAO;
-import data.ToDoElem;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import data.TodoDAO;
+import data.TodoDTO;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
 
-@Path("hello")
-public class HelloService {
+@Path("todo")
+public class TodoService {
 
     @GET
-    public String getHello() {
-        ToDoDAO todo = new ToDoDAO();
-        todo = ToDoDAO.getInstance();
+    public String getTodoList() {
+        TodoDAO todo = TodoDAO.getInstance();
         return todo.getListAsString();
 
     }
@@ -23,8 +18,8 @@ public class HelloService {
     @POST
     @Path("/getfromid")
     public String getTodoFromId(@FormParam("getid") String id) {
-        ToDoDAO todo = ToDoDAO.getInstance();
-        for (ToDoElem elem : todo.getList()) {
+        TodoDAO todo = TodoDAO.getInstance();
+        for (TodoDTO elem : todo.getList()) {
             if (elem.getId() == Integer.parseInt(id)) {
                 return elem.toString();
             }
@@ -35,14 +30,14 @@ public class HelloService {
 
     @POST
     @Path("/form")
-    public String addToDo(@FormParam("inputId") String idString, @FormParam("inputString") String input)
+    public String addTodo(@FormParam("inputId") String idString, @FormParam("inputString") String input)
     {
         int id = Integer.parseInt(idString);
 
-        ToDoElem ingredient = new ToDoElem(id, input);
-        ToDoDAO.getInstance().addElement(ingredient);
+        TodoDTO ingredient = new TodoDTO(id, input);
+        TodoDAO.getInstance().addElement(ingredient);
 
-        return ToDoDAO.getInstance().getListAsString();
+        return TodoDAO.getInstance().getListAsString();
     }
 
     @POST
@@ -50,10 +45,10 @@ public class HelloService {
     /*Variablerne tages fra URL'en
      * Eksempel på HTTP kald: POST localhost:8080/Lektion10/rest/ingredient/query?id=4&name=sukker&amount=45 */
     public String addIngredientQuery(@QueryParam("id") String id, @QueryParam("name") String name) {
-        ToDoElem todo = new ToDoElem(Integer.parseInt(id), name);
-        ToDoDAO.getInstance().addElement(todo);
+        TodoDTO todo = new TodoDTO(Integer.parseInt(id), name);
+        TodoDAO.getInstance().addElement(todo);
 
-        return "Ingredient added";
+        return "Todo added";
     }
 
     @POST
@@ -61,10 +56,10 @@ public class HelloService {
     /*Variablerne tages fra URL'en
      * Eksempel på HTTP kald: POST localhost:8080/Lektion10/rest/ingredient/4/sukker/45 */
     public String addIngredientPath(@PathParam("id") String id, @PathParam("name") String name) {
-        ToDoElem todo = new ToDoElem(Integer.parseInt(id), name);
-        ToDoDAO.getInstance().addElement(todo);
+        TodoDTO todo = new TodoDTO(Integer.parseInt(id), name);
+        TodoDAO.getInstance().addElement(todo);
 
-        return "Ingredient added";
+        return "Todo added";
     }
 
 }

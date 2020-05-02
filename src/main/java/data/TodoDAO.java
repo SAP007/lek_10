@@ -4,27 +4,27 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoDAO {
+public class TodoDAO {
 
-    private static ToDoDAO instance;
-    private List<ToDoElem> list;
+    private static TodoDAO instance;
+    private List<TodoDTO> list;
 
-    public  ToDoDAO() {
+    public TodoDAO() {
 
-        list = new ArrayList<ToDoElem>();
-        list.add(new ToDoElem(1,"handel"));
+        list = new ArrayList<TodoDTO>();
+        list.add(new TodoDTO(1,"handel"));
 
 
     }
 
-    public static ToDoDAO getInstance() {
+    public static TodoDAO getInstance() {
         if (instance == null)
-            instance = new ToDoDAO();
+            instance = new TodoDAO();
         return instance;
     }
 
     public String getTodoById(int id) {
-        for (ToDoElem curr : list) {
+        for (TodoDTO curr : list) {
 
             if (curr.getId() == id)
                 return curr.getTodo();
@@ -34,18 +34,18 @@ public class ToDoDAO {
         return "ID eksisterer ikke i listen";
     }
 
-    public void addElement(ToDoElem elem) {
+    public void addElement(TodoDTO elem) {
         list.add(elem);
     }
 
-    public List<ToDoElem> getList() {
+    public List<TodoDTO> getList() {
         return list;
     }
 
     public String getListAsString() {
         String totalString = "";
 
-        for (ToDoElem elem : list) {
+        for (TodoDTO elem : list) {
             totalString = totalString + "{" + elem.getId() + "," + elem.getTodo() + "}";
         }
 
